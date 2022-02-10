@@ -13,7 +13,15 @@ ORDER BY distance limit 10;
 
 #Also notice that distance are expressed in terms of radius.
 
+# Sql nims
+select dest.STATION_CODE, dest.LAT, dest.LNG, 
+3956 * 2 * ASIN(SQRT(POWER(SIN((21.0265600000 - abs(dest.lat)) * pi()/180 / 2),2) + COS(21.0265600000 * pi()/180 ) * COS(abs(dest.lat) *  pi()/180) * POWER(SIN((105.7616900000 - abs(dest.lng)) *  pi()/180 / 2), 2))) 
+as distance
+FROM nims.suggestion_new_site as dest
+having distance <= 3.1; # đổi từ 5km sang dặm bằng 3.1 dặm
 
+# link tham khảo geo distance search with mySQL
 https://fr.scribd.com/presentation/2569355/Geo-Distance-Search-with-MySQL
 
+# Link tham khảo
 https://qastack.vn/programming/2234204/find-nearest-latitude-longitude-with-an-sql-query
